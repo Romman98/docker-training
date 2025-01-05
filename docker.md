@@ -2,6 +2,29 @@
 
 ## Docker Basics
 
+To know the version  
+`docker --version`
+
+To check if docker is running  
+`docker run hello-world`
+
+### Container
+
+To run a container  
+`docker run <container_name>`
+- `-d` to make it run in the back ground: `docker run -d <container_name>`
+- `--name` to give the container a custom name: `docker run --name 'my_container' <container_name>`
+- `-p` to specify a port: `docker run -p 8080:80 <container_name>` 
+
+To check the running containers  
+`docker ps`
+
+To kill a container  
+`docker kill <container_name>`
+
+To stop a container - gives time for the process to close properly   
+`docker stop <container_name>`
+
 ### Pull Images
 
 To install a docker image  
