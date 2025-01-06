@@ -25,6 +25,12 @@ To kill a container
 To stop a container - gives time for the process to close properly   
 `docker stop <container_name>`
 
+To pause a container  
+`docker pause <container_name>`
+
+To unpause a container  
+`docker unpause <container_name>`
+
 ### Pull Images
 
 To install a docker image  
@@ -35,7 +41,10 @@ To install a certain version
 
 ### List
 
+To list the current running containers  
 `docker ps`
+
+To list all containers  
 `docker ps -a`
 
 ### Remove images
@@ -49,6 +58,8 @@ To remove an image forcefully
 `docker image remove -f <image>`
 
 ### Remove Container
+
+To delete/Remove a container  
 `docker remove <container_ID>`
 
 
@@ -69,7 +80,7 @@ To open an interactive shell with the container
 `docker exec it <container> /bin/bash`
 
 To install a package inside a container  
-`apt-get install <package>
+`apt-get install <package>`
 
 ### Build Containers
 
@@ -90,10 +101,12 @@ CMD ["echo","Hello there, i am a running image"]
 
 ### Tags
 
+To Tag a new created image  
 `docker tag <Image>:<Tag> <username>/<New_Name>:<Tag>`
 
 ### Push
 
+To push an image to your own repo on Dockerhub  
 `docker push <username>/<name>:<tag>`
 
 ### Help
@@ -119,3 +132,22 @@ To login into the docker hub through the terminal.
 ![docker images](media/docker_images.png)
 
 
+## Dockerfiles
+
+A `Dockerfile` is a file that programmically defines the steps for the creation of an image. It helps in
+- Reproducibility
+- Automatation
+- Transparency and Documentation
+- Optimization
+
+## Syntax
+
+The file is a set of instructions, each instruction is executed
+
+`FROM`: To specify the image you want to build from
+`RUN`: execute the command inside the container once built
+
+## Build
+
+To build an the container:
+`docker build -t <name> .`
