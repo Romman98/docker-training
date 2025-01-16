@@ -12,9 +12,14 @@ To check if docker is running
 
 To run a container  
 `docker run <container_name>`
+
+#### Options 
+
 - `-d` to make it run in the back ground: `docker run -d <container_name>`
 - `--name` to give the container a custom name: `docker run --name 'my_container' <container_name>`
 - `-p` to specify a port: `docker run -p 8080:80 <container_name>` 
+- `-e VARIABLE=VALUE` To set an environment variable 
+- `--rm ` To remove the container after the run
 
 To check the running containers  
 `docker ps`
@@ -149,5 +154,68 @@ The file is a set of instructions, each instruction is executed
 
 ## Build
 
+Steps to build a container:
+
+1. `Docker build -t <name> .`
+2. `Docker run <name>`
+
 To build an the container:
-`docker build -t <name> .`
+`docker build .`
+
+### Options:
+
+`-t <name>` To give the created image a tag
+
+### Environmnet Variables
+
+To define an environment variable, you must define it in the `Dockerfile` as:
+
+`ENV VARIABLE=VALUE` example  
+`ENV PORT=3000`
+
+### CMD vs ENTRYPOINT
+
+In CMD, you can overwrite the command in the `build command`.
+
+Example:
+
+Assume we have the below CMD command in the `Dockerfile`  
+`CMD ["echo" , "Hello from CMD in Dockerfile.cmd"]`
+
+and we build an image then run a coontainer:
+
+`docker build -t cmd-example .`  
+`docker run --rm cmd-example`
+
+the output will be:  
+`Hello from CMD in Dockerfile.cmd`
+
+if we run the command  
+`docker run --rm cmd-example echo "Hello, i am superior"`  
+
+the output will be  
+`Hello, i am superior`
+
+and it will overwrite the CMD echo command.
+
+In ENTRYPOINT, you cannot overwrite the command unless you implicitly add the `--entrypoint` option. Any extra string will be added to the command.
+
+Example:
+
+we have the below command in the `Dockerfile`
+
+`ENTRYPOINT [ "echo" , "Hello from ENTRYPOINT in Dockerfile.entrypoint" ]`
+
+Then we build an image and run a container  
+`docker build -t entrypoint-example .`  
+`docker run --rm entrypoint-example`
+
+the output will be  
+`Hello from ENTRYPOINT in Dockerfile.entrypoint`
+
+But if we run the below command:
+
+`docker run --rm entrypoint-example "Hello, i am equal"`
+
+the output will be  
+`Hello from ENTRYPOINT in Dockerfile.entrypoint Hello, i am equal`
